@@ -64,8 +64,8 @@ EOF
 	echo 'FLUSH PRIVILEGES;' >> $tfile
 
 	# run sql in tempfile
-	# echo "[i] run tempfile: $tfile"
-	# /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
+	echo "[i] run tempfile: $tfile"
+	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
 	#rm -f $tfile
 fi
 
