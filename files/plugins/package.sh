@@ -12,22 +12,21 @@ fi
 if [ ! -d $PROJECTNAME ]; then
     mkdir $PROJECTNAME
     mkdir $PROJECTNAME/app
+    cp install_sample $PROJECTNAME/install.sh
 fi
 
 # 抓取目前 app 資料夾相關檔案
-# 如果 www/app/Config/Routes/Install.php 存在則
-#     cp www/app/Config/Routes/Install.php $PROJECTNAME/Install.php
 if [ -f $ROOTPATH/app/Config/Routes/$PROJECTNAME.php ]; then
     
     mkdir $PROJECTNAME/app/Config
     mkdir $PROJECTNAME/app/Config/Routes
     cp $ROOTPATH/app/Config/Routes/$PROJECTNAME.php $PROJECTNAME/app/Config/Routes/$PROJECTNAME.php
 
-    mkdir $PROJECTNAME/app/Controller
-    cp $ROOTPATH/app/Controller/$PROJECTNAME.php $PROJECTNAME/app/Controller/$PROJECTNAME.php
+    mkdir $PROJECTNAME/app/Controllers
+    cp $ROOTPATH/app/Controllers/$PROJECTNAME.php $PROJECTNAME/app/Controllers/$PROJECTNAME.php
 
-    mkdir $PROJECTNAME/app/Model
-    cp $ROOTPATH/app/Model/$PROJECTNAME.php $PROJECTNAME/app/Model/$PROJECTNAME.php
+    mkdir $PROJECTNAME/app/Models
+    cp $ROOTPATH/app/Models/$PROJECTNAME.php $PROJECTNAME/app/Models/$PROJECTNAME.php
 
     mkdir $PROJECTNAME/app/Database
     mkdir $PROJECTNAME/app/Database/Migrations
