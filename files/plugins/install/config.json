@@ -1,0 +1,7 @@
+{
+    "pluginId":"install",
+    "pluginName":"Install",
+    "pluginDescription":"Install",
+    "pluginVersion":"1.0.0",
+    "relay":[]
+}
