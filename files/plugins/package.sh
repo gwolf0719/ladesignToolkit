@@ -26,7 +26,7 @@ if [ -f $ROOTPATH/app/Config/Routes/$PROJECTNAME.php ]; then
     cp $ROOTPATH/app/Controllers/$PROJECTNAME.php $PROJECTNAME/app/Controllers/$PROJECTNAME.php
 
     mkdir $PROJECTNAME/app/Models
-    cp $ROOTPATH/app/Models/$PROJECTNAME.php $PROJECTNAME/app/Models/$PROJECTNAME.php
+    cp $ROOTPATH/app/Models/Mod$PROJECTNAME.php $PROJECTNAME/app/Models/Mod$PROJECTNAME.php
 
     mkdir $PROJECTNAME/app/Database
     mkdir $PROJECTNAME/app/Database/Migrations

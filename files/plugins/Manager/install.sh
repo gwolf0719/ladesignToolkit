@@ -1,6 +1,6 @@
 #!/bin/sh
 ROOTPATH=../../../www/
-PROJECTNAME='PROJECTNAME'
+PROJECTNAME='Manager'
 cp -r  ./app $ROOTPATH
 
 cd $ROOTPATH

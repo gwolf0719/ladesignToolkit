@@ -15,7 +15,7 @@ fi
 cd $ROOTPATH
 echo '<?php $routes->add("/'$PROJECTNAME'", "'$PROJECTNAME'::index");$routes->add("/'$PROJECTNAME'/(:any)", "'$PROJECTNAME'::$1");' >> app/Config/Routes/$PROJECTNAME.php
 php spark make:controller $PROJECTNAME  
-php spark make:model $PROJECTNAME
+php spark make:model Mod$PROJECTNAME
 php spark make:migration $PROJECTNAME
 php spark make:seeder $PROJECTNAME
 
