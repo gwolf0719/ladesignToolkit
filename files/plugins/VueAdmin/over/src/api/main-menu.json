@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/setting-switch",
+    "children": [
+      {
+        "path": "index",
+        "component_import": "../views/setting-switch",
+        "name": "SettingSwitch",
+        "meta": {
+          "title": "Setting Switch",
+          "icon": "example"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/setting-switch",
+    "children": [
+      {
+        "path": "index",
+        "component_import": "../views/setting-switch",
+        "name": "SettingSwitch",
+        "meta": {
+          "title": "Setting Switch2",
+          "icon": "example"
+        }
+      }
+    ]
+  }
+]
