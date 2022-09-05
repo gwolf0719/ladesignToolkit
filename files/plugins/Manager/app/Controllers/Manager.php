@@ -13,6 +13,8 @@ class Manager extends BaseController
     {
         $this->manager = new ModManager();
         $this->api = new Api();
+        $this->request =\Config\Services::request();
+        $this->db = \Config\Database::connect();
     }
     /***
      * =========================================================
@@ -220,6 +222,7 @@ class Manager extends BaseController
      */
 
     function login(){
+        
         $cols = ['managerId', 'managerPassword'];
         $required = ['managerId', 'managerPassword'];
         
@@ -238,6 +241,15 @@ class Manager extends BaseController
             $this->manager->setAuthToken($managerId);
             $manager = $this->manager->find($managerId);
             unset($manager['managerPassword']);
+            $log = array(
+                'managerId' => $managerId,
+                'managerName' => $manager['managerName'],
+                'loginIp' => $this->request->getIPAddress(),
+                'status' => 1,
+                'notices' => 'login success',
+                'createdAt' => date('Y-m-d H:i:s')
+            );
+            $this->db->table('managers_login_history')->set($log)->insert();
             $this->api->show('200', 'success', $manager);
         } else {
             $this->api->show('500', 'error', 'login fail');
