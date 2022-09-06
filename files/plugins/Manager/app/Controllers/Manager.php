@@ -186,6 +186,26 @@ class Manager extends BaseController
         $res = $this->manager->find($data['managerId']);
         $this->api->show('200', 'success', $res);
     }
+    /**
+     * @api {post} /Manager/findOne/      Manager Find One
+     * @apiName Manager Find One
+     * @apiSampleRequest /Manager/findOne/
+     * @apiGroup Manager
+     * 
+     * @apiHeader {String} Authorization Bearer + Token
+     * 
+     
+     * 
+     * @apiSuccess {Number} sysCode Status Code
+     * @apiSuccess {String} sysMsg System Message
+     * @apiSuccess {String} data Data
+     */
+    function findOneByToken()
+    {
+        $res = $this->manager->chkOnlyAuthToken();
+        print_r($res);
+        $this->api->show('200', 'success', $res);
+    }
 
     /**
      * @api {post} /Manager/findAll/      Manager Find All

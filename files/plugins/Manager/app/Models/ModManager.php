@@ -60,12 +60,14 @@ class ModManager extends Model
     }
     // 從 http header 中取得 authToken
     function getAuthToken(){
+
         $authToken = $_SERVER['HTTP_AUTHORIZATION'];
+        
         if ($authToken == null || $authToken == ''){
             return false;
         }
         // 去除 Bearer 字串
-        $authToken = substr($authToken,7);
+        // $authToken = substr($authToken,7);
         // 去除空白字元
         $authToken = preg_replace('/\s+/', '', $authToken);
         return $authToken;
