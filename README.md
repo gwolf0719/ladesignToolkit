@@ -1,7 +1,7 @@
 # 直接執行安裝包  
-‵``  
+``` 
 ./install.sh
-`‵` 
+``` 
 > 20200907版會安裝:  
 > php mysql nginx docker環境  
 > codeIgniter 4  
