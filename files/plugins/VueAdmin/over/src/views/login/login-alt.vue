@@ -112,9 +112,9 @@ const router = useRouter()
 let loginReq = () => {
   loading.value = true
   console.log(formInline)
-  const anagerStore = useManagerStore()
+  const managerStore = useManagerStore()
   console.log(formInline)
-  anagerStore
+  managerStore
     .login(formInline)
     .then(() => {
       console.log('login success')

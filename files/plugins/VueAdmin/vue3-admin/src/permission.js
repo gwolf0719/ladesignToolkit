@@ -4,8 +4,8 @@ import { getToken, setToken } from '@/utils/auth'
 import NProgress from 'nprogress'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 import 'nprogress/nprogress.css'
-import getPageTitle from '@/utils/getPageTitle'
-import { useUserStore } from '@/store/user'
+
+import { useManagerStore } from './store/manager'
 import { usePermissionStore } from '@/store/permission'
 
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
@@ -17,7 +17,8 @@ router.beforeEach(async (to, from, next) => {
   if (!settings.isNeedLogin) setToken(settings.tmpToken)
   const hasToken = getToken()
 
-  const userStore = useUserStore()
+  // const userStore = useUserStore()
+  const managerStore = useManagerStore()
   const permissionStore = usePermissionStore()
   if (hasToken) {
     if (to.path === '/login') {
@@ -34,7 +35,9 @@ router.beforeEach(async (to, from, next) => {
           if (settings.isNeedLogin) {
             // get user info
             // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-            const { roles } = await userStore.getInfo()
+            const { roles } = {
+              roles: ['admin']
+            }
             accessRoutes = await permissionStore.generateRoutes(roles)
           } else {
             accessRoutes = asyncRoutes
