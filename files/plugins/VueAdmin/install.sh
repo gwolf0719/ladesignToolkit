@@ -12,17 +12,10 @@ reset(){
     git init
     sudo npm -g i pnpm
     pnpm i 
-    pnpm run dev
+    pnpm run dev 
 }
 
-# while true; do
-#     read -p "請問是否需要複製檔案(y/n)" yn
-#     case $yn in
-#         [Yy]* ) cpinstall;reset;;
-#         [Nn]* ) reset;;
-#         * ) echo "直接結束"exit;;
-#     esac
-# done
+
 
 Message='請選擇要使用的動作'
 options=("重新安裝" "單純重新執行" "封裝")

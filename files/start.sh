@@ -12,11 +12,12 @@ fi
 
 
 # http
+echo "http====="
 php-fpm7 -D
 nginx -c /etc/nginx/nginx.conf &
 
 # mysql
-
+echo "mysql====="
 MYSQL_ROOT_PWD="dev"
 MYSQL_USER_DB="dev"
 
@@ -69,8 +70,15 @@ EOF
 	#rm -f $tfile
 fi
 
-echo "[i] Sleeping 5 sec"
-sleep 5
+
+# 建立一個實體檔案 mysqlstart 在 www 資料夾下
+# 並且在這個檔案中寫入以下內容
+# mkdir www
+# touch www/mysqlstart
+echo 'mysql start' > /web/mysqlstart
 
 echo '[i] start running mysqld'
 exec /usr/bin/mysqld --user=mysql --console --skip_networking=0
+
+
+

@@ -1,4 +1,28 @@
 #!/bin/sh
+# 進度條
+function bar(){
+    s=$1
+    i=0
+    str='#'
+    ch=('|' '\' '-' '/')
+    index=0
+    while [ $i -le $s ]
+    do
+        printf "[%-${s}s][%d%%][%c]\r" $str $(($i*4)) ${ch[$index]}
+        str+='#'
+        let i++
+        let index=i%4
+        sleep 0.1
+    done
+    printf "\n"
+}
+
+
+
+
+
+
+
 docker ps
 
 echo '====================='
@@ -26,29 +50,19 @@ read containerName
 containerName=${containerName:-$imageName}
 docker run -d --name $containerName -p 80:80 -p 3306:3306 -v $PWD:/web  $imageName
 
-echo '====================='
-echo '環境部署中請稍後....'
-t=30
-while [ $t -gt 0 ]
-do
-    echo -n "$t "
-    sleep 1
-    t=$(($t-1))
-done
+
+bar 30  
 
 
-echo '====================='
-echo '安裝 install 環境'
-cd ./files/plugins/install
-sh install.sh
 
-echo '====================='
-echo '安裝 Manager 環境'
-cd ../Manager
-sh install.sh
 
 echo '====================='
 echo '安裝 VueAdmin 環境'
-cd ../VueAdmin
-sh install.sh
+cd ./files/plugins/VueAdmin
+sh install.sh ; 
+
+^z
+bg %1
+
+
 

@@ -7,18 +7,12 @@ import useExample from './modules/useExample'
 import codeGenerator from './modules/codeGenerator'
 import routerJson from '../api/main-menu.json'
 
-// {
-  //   path: '/setting-switch',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/setting-switch'),
-  //       name: 'SettingSwitch',
-  //       meta: { title: 'Setting Switch', icon: 'example' }
-  //     }
-  //   ]
-  // },
+/**
+ * 抓取 src/api/main-menu.json 中的路由配置
+ * 自動產生 router
+ *
+ *
+ **/
 const constantRoutesTemp = routerJson.map(
   item => {
     return {
@@ -28,7 +22,6 @@ const constantRoutesTemp = routerJson.map(
         child => {
           return {
             path: child.path,
-            // component: () => import(`${child.component_import}`),
             component: () => import(`${child.component_import}`),
             name: child.name,
             meta: {
@@ -83,7 +76,7 @@ export const constantRoutes = [
       }
     ]
   },
-  codeGenerator,
+  // codeGenerator,
   ...constantRoutesTemp,
   // {
   //   path: '/setting-switch',
@@ -97,39 +90,39 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: '/guide',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index.vue'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide' }
-      }
-    ]
-  },
-  {
-    path: '/error-log',
-    component: Layout,
-    name: 'ErrorLog',
-    redirect: '/error-log/list',
-    meta: { title: 'ErrorLog', icon: 'bug' },
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/views/error-log'),
-        name: 'ErrorLog',
-        meta: { title: 'ErrorLog' }
-      },
-      {
-        path: 'error-log-test',
-        component: () => import('@/views/error-log/ErrorLogTest.vue'),
-        name: 'ErrorLogTest',
-        meta: { title: 'ErrorLog Test' }
-      }
-    ]
-  },
+  // {
+  //   path: '/guide',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/guide/index.vue'),
+  //       name: 'Guide',
+  //       meta: { title: 'Guide', icon: 'guide' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/error-log',
+  //   component: Layout,
+  //   name: 'ErrorLog',
+  //   redirect: '/error-log/list',
+  //   meta: { title: 'ErrorLog', icon: 'bug' },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       component: () => import('@/views/error-log'),
+  //       name: 'ErrorLog',
+  //       meta: { title: 'ErrorLog' }
+  //     },
+  //     {
+  //       path: 'error-log-test',
+  //       component: () => import('@/views/error-log/ErrorLogTest.vue'),
+  //       name: 'ErrorLogTest',
+  //       meta: { title: 'ErrorLog Test' }
+  //     }
+  //   ]
+  // },
   {
     path: '/nested',
     component: Layout,

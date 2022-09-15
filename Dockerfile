@@ -13,8 +13,8 @@ RUN apk update && \
 	rm -rf /var/cache/apk/*
 
 RUN apk add composer nodejs npm curl bash
-RUN npm install -g apidoc
-# RUN npm install gulp  gulp-sass -g
+
+RUN npm install gulp  gulp-sass -g
 
 
 COPY files/etc/php7 /etc/php7

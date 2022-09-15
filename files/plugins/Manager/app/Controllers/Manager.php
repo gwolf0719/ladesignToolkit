@@ -52,18 +52,15 @@ class Manager extends BaseController
         if ($chk) {
             $this->api->show('500', 'error', 'managerId already exists');
         }
-        $data['managerPassword'] = md5($data['managerPassword']);
-        $res = $this->manager->insert($data);
-        if ($res) {
-            $this->api->show('200', 'success', 'create success');
-        } else {
-            $this->api->show('500', 'error', 'create fail');
-        }
+        $data['managerPassword'] = password_hash($data['managerPassword'], PASSWORD_DEFAULT);
+        $this->manager->insert($data);
+        $this->api->show('200', 'success', 'create success');
+        
     }
     /**
-     * @api {post} /Manager/updateOne/      Manager Update One
-     * @apiName Manager Update One
-     * @apiSampleRequest /Manager/updateOne/
+     * @api {post} /Manager/setOne/      Manager Insert or Update One
+     * @apiName Manager setOne One
+     * @apiSampleRequest /Manager/setOne/
      * @apiGroup Manager
      * @apiVersion 0.1.0
      * @apiDescription Update One <span>這裡不提供修改密碼功能</span>
@@ -72,28 +69,30 @@ class Manager extends BaseController
     
      * @apiBody {String} managerId         Manager Id
      * @apiBody {String} managerName       Manager Name
+     * @apiBody {String} managerPassword   Manager Password
      * @apiBody {Number} level             Manager Level
      * 
      * @apiSuccess {Number} sysCode Status Code
      * @apiSuccess {String} sysMsg System Message
      */
-    function updateOne()
-    {
-        $cols = ['managerId', 'managerName', 'level'];
+    
+
+    function setOne(){
+        $cols = ['managerId', 'managerName','managerPassword', 'level'];
         $required = ['managerId', 'managerName', 'level'];
         $data = $this->api->chkJsonApi($cols, $required);
-        $chk = $this->manager->find($data['managerId']);
-        if (!$chk) {
-            $this->api->show('500', 'error', 'managerId not exists');
-        }
-        $data['updatedAt'] = date('Y-m-d H:i:s');
-        $res = $this->manager->update($data['managerId'], $data);
-        if ($res) {
-            $this->api->show('200', 'success', 'update success');
-        } else {
-            $this->api->show('500', 'error', 'update fail');
-        }
+        
+        $data['level'] = 1;
+        if($this->manager->find($data['managerId'])){
+            $data['updatedAt'] = date('Y-m-d H:i:s');
+            $res = $this->manager->update($data['managerId'],$data);
+        }else{
+            $res = $this->manager->set($data)->insert();
+        }   
+        $this->api->show('200', 'success', 'update success');
+        
     }
+
     /**
      * @api {post} /Manager/resetPassWord/      Manager reset Password
      * @apiName Manager reset Password
@@ -121,7 +120,7 @@ class Manager extends BaseController
         if (!$chk) {
             $this->api->show('500', 'error', 'managerId not exists');
         }
-        $data['managerPassword'] = md5($data['managerPassword']);
+        $data['managerPassword'] = password_hash($data['managerPassword'], PASSWORD_DEFAULT);
         $data['updatedAt'] = date('Y-m-d H:i:s');
         $res = $this->manager->update($data['managerId'], $data);
         if ($res) {
@@ -144,7 +143,7 @@ class Manager extends BaseController
      * @apiSuccess {Number} sysCode Status Code
      * @apiSuccess {String} sysMsg System Message
      */
-    function removeOne()
+    function deleteOne()
     {
         $cols = ['managerId'];
         $required = ['managerId'];

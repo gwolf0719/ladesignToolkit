@@ -1,0 +1,1 @@
+<?php $routes->add("/Member", "Member::index");$routes->add("/Member/(:any)", "Member::$1");
