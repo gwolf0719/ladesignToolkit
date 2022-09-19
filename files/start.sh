@@ -75,7 +75,7 @@ fi
 # 並且在這個檔案中寫入以下內容
 # mkdir www
 # touch www/mysqlstart
-echo 'mysql start' > /web/mysqlstart
+echo 'mysql start' > /web/www/mysqlstart
 
 echo '[i] start running mysqld'
 exec /usr/bin/mysqld --user=mysql --console --skip_networking=0

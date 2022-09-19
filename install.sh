@@ -51,18 +51,21 @@ containerName=${containerName:-$imageName}
 docker run -d --name $containerName -p 80:80 -p 3306:3306 -v $PWD:/web  $imageName
 
 
-bar 30  
+cd ./files/plugins/
+sh ./phpinstall.sh
+
+# bar 30  
 
 
 
 
-echo '====================='
-echo '安裝 VueAdmin 環境'
-cd ./files/plugins/VueAdmin
-sh install.sh ; 
+# echo '====================='
+# echo '安裝 VueAdmin 環境'
+# cd ./files/plugins/VueAdmin
+# sh install.sh ; 
 
-^z
-bg %1
+# ^z
+# bg %1
 
 
 
