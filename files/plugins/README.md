@@ -7,5 +7,5 @@
 [] Products 商品功能
 [] Media 媒體素材（圖庫）  
 [] Contact 聯絡我們  
-[] Article  文章系統 
+[] Article  文章系統  
 [] Section  章節系統（可以同時依附在商品和文章系統）
