@@ -23,7 +23,7 @@ ROOTPATH=../../www
 function selectPlugin(){
     echo '請選擇要安裝的套件'
     echo '=============================================='
-    options=("init" "Manager" "Member" "Products" "Media" "Contact" "Exit")
+    options=("init" "Manager" "Member" "Products" "Media" "Contact" "Article" "Section" "ContentClass" "Exit")
     
     select v in "${options[@]}"; do
         case $v in
@@ -64,6 +64,27 @@ function selectPlugin(){
                 ;;
             "Contact")
                 cd Contact
+                sh ./install.sh
+                cd ../
+                selectPlugin
+                break
+                ;;
+            "Article")
+                cd Article
+                sh ./install.sh
+                cd ../
+                selectPlugin
+                break
+                ;;
+            "Section")
+                cd Section
+                sh ./install.sh
+                cd ../
+                selectPlugin
+                break
+                ;;
+            "ContentClass")
+                cd ContentClass
                 sh ./install.sh
                 cd ../
                 selectPlugin

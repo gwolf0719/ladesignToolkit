@@ -5,6 +5,34 @@ namespace App\Libraries;
 class Arr
 {
     /**
+     * 陣列轉樹狀圖
+     * @param array $arr
+     * @param string $id
+     * @param string $parent_id
+     * @param string $children
+     * @return array
+     */
+    public static function toTree(array $arr, string $id = 'id', string $parent_id = 'parent_id', string $children = 'children'){
+        $refer = [];
+        $tree = [];
+        foreach($arr as $k => $v){
+            $refer[$v[$id]] = &$arr[$k];
+        }
+        foreach($arr as $k => $v){
+            $pid = $v[$parent_id];
+            if($pid == 0){
+                $tree[] = &$arr[$k];
+            }else{
+                if(isset($refer[$pid])){
+                    $parent = &$refer[$pid];
+                    $parent[$children][] = &$arr[$k];
+                }
+            }
+        }
+        return $tree;
+    }
+
+    /**
      * 將二維陣列的特定 key 直接整理成新的單維陣列
      */
     function keySelect2Arr($arr, $key)
