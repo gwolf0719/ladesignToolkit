@@ -71,9 +71,8 @@ class ContentClass extends BaseController
         $this->api->show(200, '取得成功', $tree);
      }
 
-    //  刪除分類
     /**
-     * @api {post} /ContentClass/del/:id 刪除分類
+     * @api {post} /ContentClass/del/ 刪除分類
      * 
      * @apiName del
      * @apiGroup ContentClass
@@ -87,15 +86,20 @@ class ContentClass extends BaseController
      * @apiSuccess {String} sysMsg System Message
      */
 
-     function del($id){
-        // 判斷是否有子分類
-        if($this->db->table('content_class')->where('parent_id',$id)->countAllResults() > 0){
-            $this->api->show(400, '有子分類，無法刪除');
-        }
+     function del(){
+        $cols = ['id'];
+        $required = ['id'];
+        $data = $this->api->chkJsonApi($cols, $required);
+        $id = $data['id'];
         // 判斷分類存在
         if($this->db->table('content_class')->where('id',$id)->countAllResults() == 0){
             $this->api->show(400, '分類不存在');
         }
+        // 判斷是否有子分類
+        if($this->db->table('content_class')->where('parent_id',$id)->countAllResults() > 0){
+            $this->api->show(400, '有子分類，無法刪除');
+        }
+        
         $this->db->table('content_class')->where('id',$id)->delete();
         $this->api->show(200, '刪除成功');
      }
