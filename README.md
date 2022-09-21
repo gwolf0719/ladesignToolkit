@@ -8,7 +8,7 @@ Ladesign 工具包基於 CodeIgniter4 框架開發的 API 快速安裝部署工�
 [] 媒體庫  Media   
 [] 聯絡我們  Contact   
 [] 文章  Article   
-[] 區塊型內文  Section   
+[] [區塊型內文  Section](https://github.com/gwolf0719/ladesignToolkit/tree/master/files/plugins/Section)   
 [] [內容分類  ContentClass](https://github.com/gwolf0719/ladesignToolkit/tree/master/files/plugins/ContentClass)   
 
 
