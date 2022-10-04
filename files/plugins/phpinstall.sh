@@ -104,7 +104,7 @@ function selectPlugin(){
 function chkMysqlStart(){
     if [ ! -f $ROOTPATH/mysqlstart ]; then
         echo "系統設定中"
-        bar 30
+        bar 100
         chkMysqlStart
     fi
 }
