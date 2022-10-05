@@ -51,3 +51,14 @@ export function setOnce(data){
     isAlertErrorMsg: false
   })
 }
+
+export function createOne(data){
+  return request({
+    url:'/Manager/createOne/',
+    data,
+    method: 'post',
+    bfLoading: false,
+    isParams: false,
+    isAlertErrorMsg: false
+  })
+}

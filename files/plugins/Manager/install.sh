@@ -14,7 +14,7 @@ newJSON=''
 cd ../files/plugins/$PROJECTNAME
 while read nl;do
     newJSON=$newJSON$nl
-done < menu.json
+done < ./vue3admin/menu.json
 newJSON=$newJSON,
 echo '======================='
 echo $newJSON | jq .

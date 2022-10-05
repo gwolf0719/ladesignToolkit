@@ -17,7 +17,7 @@
             <el-form-item label="管理員姓名" prop="managerName">
               <el-input v-model="form.managerName" placeholder="管理員姓名" />
             </el-form-item>
-  
+
             <el-button type="info" class="login-btn" size="default" @click="addManager">
               送出
             </el-button>
@@ -30,10 +30,10 @@
         <el-table-column prop="managerPassword" label="managerPassword" />
         <el-table-column prop="managerName" label="managerName" />
         <el-table-column prop="level" label="level" />
-        <el-table-column prop="lastDateTime" label="lastDateTime" sortable />
+        <el-table-column prop="updatedAt" label="lastDateTime" sortable />
         <el-table-column fixed="right" label="Operations" width="120">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="handleClick(scope.row)">Detail</el-button>
+            <el-button link type="primary" size="small" @click="handleClick(scope.row)">編輯</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,7 +49,7 @@
           <el-form-item label="管理員姓名" prop="managerName">
             <el-input v-model="editForm.managerName" placeholder="管理員姓名" />
           </el-form-item>
-  
+
           <el-button type="info" class="login-btn" size="default" @click="editManager">
             送出
           </el-button>
@@ -67,9 +67,9 @@
   // import settings from '@/settings'
   import { ElMessage } from 'element-plus'
   import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-  import { getList, setOnce, RemoveOne } from '@/api/manager'
+  import { getList, setOnce, RemoveOne,createOne } from '@/api/manager'
   import { onMounted, reactive, ref } from 'vue'
-  
+
   let { elConfirm } = useElement()
   // 增加管理員 dialogVisible
   const dialogVisible = ref(false)
@@ -87,14 +87,14 @@
     managerName: '',
     level: '1',
   })
-  
-  
-  
+
+
+
   onMounted(() => {
     setList()
   })
-  
-  
+
+
   // 取得清單
   let list = ref([])
   let setList = () => {
@@ -102,7 +102,7 @@
       list.value = res.data
     })
   }
-  
+
   // 點擊詳細資料
   let handleClick = (row) => {
     console.log(row)
@@ -111,11 +111,18 @@
     editForm.managerName = row.managerName
     editDialogVisible.value = true
   }
+
+  // 增加管理員
   let addManager = () => {
-    setOnce(form).then(res => {
+    createOne(form).then(res => {
       setList()
       dialogVisible.value = false;
       ElMessage.success('新增成功')
+      // 清空表單()
+      form.managerId = ''
+      form.managerPassword = ''
+      form.managerName = ''
+
     }).catch(err => {
       let dialogVisible = ref(false);
       ElMessage.error(err.message)
@@ -149,12 +156,11 @@
         })
       })
       .catch(() => {
-  
+
       })
-  
+
   }
-  
-  
-  
+
+
+
   </script>
-  

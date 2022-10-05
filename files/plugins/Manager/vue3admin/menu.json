@@ -1,0 +1,14 @@
+{
+    "path": "/index",
+    "children": [
+      {
+        "path": "index",
+        "component_import": "../views/manager/index.vue",
+        "name": "managerList",
+        "meta": {
+          "title": "管理員設定",
+          "icon": "user"
+        }
+      }
+    ]
+  }

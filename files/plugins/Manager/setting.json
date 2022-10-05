@@ -1,0 +1,39 @@
+{
+    "install": {
+        "codeigniter4": [
+            "app/Config/Routes/Manager.php",
+            "app/Controllers/Manager.php",
+            "app/Database/Migrations/2022-09-01-083721_Manager.php",
+            "app/Database/Seeds/Manager.php",
+            "app/Models/ModManager.php"
+        ],
+        "panel": [
+            "vue3admin/src/views/manager/index.vue",
+            "vue3admin/src/api/manager.js",
+            "vue3admin/src/store/manager.js"
+        ],
+        "menu": {
+            "path": "/index",
+            "children": [
+                {
+                    "path": "index",
+                    "component_import": "../views/manager/index.vue",
+                    "name": "managerList",
+                    "meta": {
+                        "title": "管理員設定",
+                        "icon": "user"
+                    }
+                }
+            ]
+        },
+        "shell": [
+            "php spark migrate -all",
+            "php spark db:seed Manager",
+            "apidoc -i app/Controllers/ -o public/doc"
+        ]
+    },
+    "package": {
+        "codeigniter4": [],
+        "panel": []
+    }
+}
