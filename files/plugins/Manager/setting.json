@@ -10,7 +10,8 @@
         "panel": [
             "vue3admin/src/views/manager/index.vue",
             "vue3admin/src/api/manager.js",
-            "vue3admin/src/store/manager.js"
+            "vue3admin/src/store/manager.js",
+            "vue3admin/src/layout/components/Navbar.vue"
         ],
         "menu": {
             "path": "/index",

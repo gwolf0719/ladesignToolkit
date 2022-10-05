@@ -1,4 +1,4 @@
-import {LoginMangerReq,getInfoReq } from '@/api/manager'
+import { LoginMangerReq, getInfoReq } from '@/api/manager'
 import { setToken, removeToken } from '@/utils/auth'
 import router, { asyncRoutes } from '@/router'
 import { defineStore } from 'pinia'
@@ -66,17 +66,17 @@ export const useManagerStore = defineStore('manager', {
       return new Promise((resolve, reject) => {
         getInfoReq()
           .then((response) => {
-            console.log('res getInfoReq',response)
+            console.log('res getInfoReq', response)
 
             data.roles = ['admin']
-            console.log('hello',data)
+            console.log('hello', data)
             const { roles, managerName } = data
             this.M_username(managerName)
             this.M_roles(['admin'])
             resolve(data)
           })
           .catch((error) => {
-            console.log('error',error)
+            console.log('error', error)
             reject(error)
           })
       })
@@ -84,14 +84,8 @@ export const useManagerStore = defineStore('manager', {
     // user logout
     logout() {
       return new Promise((resolve, reject) => {
-        logoutReq()
-          .then(() => {
-            this.resetState()
-            resolve(null)
-          })
-          .catch((error) => {
-            reject(error)
-          })
+        this.resetState()
+        resolve(null)
       })
     },
     resetState() {
