@@ -38,6 +38,7 @@ class Article extends BaseController
         $required = ['subject', 'content'];
         $data = $this->api->chkJsonApi($cols, $required);
         
+        
         if($data['id'] == ''){
             $data['id'] = uniqid();
         }

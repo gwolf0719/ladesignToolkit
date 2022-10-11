@@ -24,6 +24,7 @@ const constantRoutesTemp = routerJson.map(
             path: child.path,
             component: () => import(`${child.component_import}`),
             name: child.name,
+            hidden: child.hidden,
             meta: {
               title: child.meta.title,
               icon: child.meta.icon

@@ -1,4 +1,6 @@
-<?php namespace App\Libraries;
+<?php
+
+namespace App\Libraries;
 
 /**
  * 2022-07-27 更新版 @James Chou
@@ -7,66 +9,77 @@
  * chkGetPostApi
  * 
  */
-class Api{
+class Api
+{
     // 接收 json 資料並驗證
-    function chkJsonApi($cols = array(),$requred = array(),$default=array()){
+    function chkJsonApi($cols = array(), $requred = array(), $default = array())
+    {
         $json = file_get_contents('php://input');
-        $json_arr = json_decode($json,true);
+        $json_arr = json_decode($json, true);
+        // 如果 json_arr 為空，則回傳錯誤
+        if (empty($json_arr)) {
+            $this->show('400', 'json 格式錯誤');
+        }
         $res = [];
         $requredErr = [];
-        foreach($cols as $col){
-            $res[$col] = $json_arr[$col];
-            // 如果 $res[$col] 不存在且 $default[$col] 存在，則 $res[$col] = $default[$col];
-            if(!isset($res[$col]) && isset($default[$col])){
-                $res[$col] = $default[$col];
-            }
-            // 如果 $res[$col] 不存在且 $requred[$col] 存在，則 $requredErr[] = $col;
-            if(!isset($res[$col]) && in_array($col,$requred)){
-                $requredErr[] = $col;
+        foreach ($cols as $col) {
+            if (isset($json_arr[$col])) {
+                $res[$col] = $json_arr[$col];
+                // 如果 $res[$col] 不存在且 $default[$col] 存在，則 $res[$col] = $default[$col];
+                if (!isset($res[$col]) && isset($default[$col])) {
+                    $res[$col] = $default[$col];
+                }
+                // 如果 $res[$col] 不存在且 $requred[$col] 存在，則 $requredErr[] = $col;
+                if (!isset($res[$col]) && in_array($col, $requred)) {
+                    $requredErr[] = $col;
+                }
+            }else{
+                $res[$col] = '';
             }
         }
-        if(count($requredErr)>0){
+        if (count($requredErr) > 0) {
             $data['requredErr'] = $requredErr;
             $data['cols'] = $cols;
             $data['required'] = $requred;
             $data['default'] = $default;
             $data['request'] = $_REQUEST;
-            $this->show('000','Insufficient field data',$data);
-        }else{
+            $this->show('000', 'Insufficient field data', $data);
+        } else {
             return $res;
         }
-
     }
     // 接收 get post 資料並驗證
-    function chkGetPostApi($cols = array(),$requred = array(),$default=array()){
-        
+    function chkGetPostApi($cols = array(), $requred = array(), $default = array())
+    {
+
         $request = service('request');
         $res = [];
         $requredErr = [];
-        foreach($cols as $col){
+        foreach ($cols as $col) {
             $res[$col] = $request->getGetPost($col);
             // 如果 $res[$col] 不存在且 $default[$col] 存在，則 $res[$col] = $default[$col];
-            if(!isset($res[$col]) && isset($default[$col])){
+            if (!isset($res[$col]) && isset($default[$col])) {
                 $res[$col] = $default[$col];
             }
             // 如果 $res[$col] 不存在且 $requred[$col] 存在，則 $requredErr[] = $col;
-            if(!isset($res[$col]) && in_array($col,$requred)){
+            if (!isset($res[$col]) && in_array($col, $requred)) {
                 $requredErr[] = $col;
             }
         }
-        if(count($requredErr)>0){
+        if (count($requredErr) > 0) {
             $data['requredErr'] = $requredErr;
             $data['cols'] = $cols;
             $data['required'] = $requred;
             $data['default'] = $default;
             $data['request'] = $_REQUEST;
-            $this->show('000','Insufficient field data',$data);
-        }else{
+            $this->show('000', 'Insufficient field data', $data);
+        } else {
             return $res;
         }
     }
-    function show($sysCode,$sysMsg='',$data=''){
-        if($sysMsg == '' ){
+    function show($sysCode, $sysMsg = '', $data = '')
+    {
+        if ($sysMsg == '') {
             switch ($sysCode) {
                 case '000':
                     # code...
@@ -92,11 +105,11 @@ class Api{
             }
         }
         $json_arr['sysMsg'] = $sysMsg;
-        if($data != ""){
+        if ($data != "") {
             $json_arr['data'] = $data;
         }
         $json_arr['sysCode'] = $sysCode;
-        
+
         header("ALLOW-CONTROL-ALLOW-ORIGIN:*");
         header('Access-Control-Allow-Methods: *');
         header('Access-Control-Allow-Headers: *');
@@ -106,7 +119,7 @@ class Api{
         header('Content-Type: application/json; charset=utf-8');
         header('HTTP/1.1 200 OK');
         echo json_encode($json_arr);
-        
+
         exit();
     }
 }

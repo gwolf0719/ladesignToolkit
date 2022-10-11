@@ -48,7 +48,7 @@ class Media extends BaseController
             $file->move($path, $newName);
         }
         $data = [
-            'uri'=>$path.'/'.$newName,
+            'uri'=>base_url($path.'/'.$newName),
             'path'=>$path,
             'type'=>$file->getClientMimeType(),
         ];

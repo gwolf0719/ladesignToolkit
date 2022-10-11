@@ -29,8 +29,8 @@ def install():
         os.chdir(cwd)
         for i in setting['install']['panel']:
             # 如果 vue3admin/src/views/manager/ 不存在就建立
-            if not os.path.isdir(wwwDir + 'vue3admin/src/views/manager/'):
-                os.mkdir(wwwDir + 'vue3admin/src/views/manager/')
+            if not os.path.isdir(wwwDir + 'vue3admin/src/views/article/'):
+                os.mkdir(wwwDir + 'vue3admin/src/views/article/')
             copy_file('./'+i, wwwDir + i)
         os.chdir(cwd)
         os.chdir(wwwDir)
@@ -46,6 +46,7 @@ def install():
             # 回存檔案
             with open(rootDir + 'www/vue3admin/src/api/main-menu.json', 'w') as f:
                 json.dump(oldMenuData, f, indent=4)
+
 
         
         

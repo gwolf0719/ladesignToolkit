@@ -7,6 +7,8 @@ import os
 #     for i in tqdm(range(range_num)):
 #         sleep(0.01)
 
+# 紀錄目前資料夾路徑
+cwd = os.getcwd()
 
 # 取得目前的 docker container id
 print("目前的 docker container")
@@ -84,3 +86,12 @@ os.system("git init")
 os.system("sudo npm -g i pnpm")
 os.system("pnpm i")
 print("Vue3-admin 安裝完成，請執行 pnpm run dev")
+
+
+print("安裝初始設定")
+os.chdir(cwd+"/files/plugins/install")
+os.system("sh ./install.sh")
+
+print("安裝系統管理員")
+os.chdir(cwd+"/files/plugins/Manager")
+os.system("python3 ./setup.py")
