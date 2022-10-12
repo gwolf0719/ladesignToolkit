@@ -22,7 +22,7 @@ const constantRoutesTemp = routerJson.map(
         child => {
           return {
             path: child.path,
-            component: () => import(`${child.component_import}`),
+            component: () => import(`../views/${child.dir}/${child.component_import}.vue`),
             name: child.name,
             hidden: child.hidden,
             meta: {

@@ -18,10 +18,11 @@
             "children": [
                 {
                     "path": "index",
-                    "component_import": "../views/manager/index.vue",
+                    "component_import": "index",
+                    "dir": "manager",
                     "name": "managerList",
                     "meta": {
-                        "title": "管理員設定",
+                        "title": "\u7ba1\u7406\u54e1\u8a2d\u5b9a",
                         "icon": "user"
                     }
                 }
