@@ -47,7 +47,7 @@ class Article extends BaseController
         }
 
         $this->article->insert($data);
-        $this->api->show(200, '新增成功');
+        $this->api->show(200, '新增成功', $data);
     }
 
     /**

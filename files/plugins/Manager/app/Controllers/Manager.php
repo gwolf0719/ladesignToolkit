@@ -52,7 +52,7 @@ class Manager extends BaseController
         if ($chk) {
             $this->api->show('500', 'error', 'managerId already exists');
         }
-        $data['managerPassword'] = password_hash($data['managerPassword'], PASSWORD_DEFAULT);
+        $data['managerPassword'] = md5($data['managerPassword']);
         $this->manager->insert($data);
         $this->api->show('200', 'success', 'create success');
         
@@ -83,7 +83,12 @@ class Manager extends BaseController
         $data = $this->api->chkJsonApi($cols, $required);
         
         $data['level'] = 1;
+        
         if($this->manager->find($data['managerId'])){
+            $manager = $this->manager->find($data['managerId']);
+            if($data['managerPassword'] != $manager['managerPassword'] && $data['managerPassword'] != ''){
+                $data['managerPassword'] = md5($data['managerPassword']);
+            }
             $data['updatedAt'] = date('Y-m-d H:i:s');
             $res = $this->manager->update($data['managerId'],$data);
         }else{
@@ -120,7 +125,7 @@ class Manager extends BaseController
         if (!$chk) {
             $this->api->show('500', 'error', 'managerId not exists');
         }
-        $data['managerPassword'] = password_hash($data['managerPassword'], PASSWORD_DEFAULT);
+        $data['managerPassword'] = md5($data['managerPassword']);
         $data['updatedAt'] = date('Y-m-d H:i:s');
         $res = $this->manager->update($data['managerId'], $data);
         if ($res) {
@@ -202,7 +207,6 @@ class Manager extends BaseController
     function findOneByToken()
     {
         $res = $this->manager->chkOnlyAuthToken();
-        print_r($res);
         $this->api->show('200', 'success', $res);
     }
 

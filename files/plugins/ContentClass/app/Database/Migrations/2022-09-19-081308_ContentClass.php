@@ -53,8 +53,8 @@ class ContentClass extends Migration
 
         $cols = [
             'id'=>[
-                'type'=>'INT',
-                'constraint'=>11,
+                'type'=>'VARCHAR',
+                'constraint'=>20,
             ],
             'ref_model'=>[
                 'type'=>'VARCHAR',
