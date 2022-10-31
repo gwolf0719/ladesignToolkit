@@ -12,7 +12,7 @@ class Article extends Migration
         $cols = [
             'id'=>[
                 'type'=>'VARCHAR',
-                'constraint'=>20
+                'constraint'=>11
             ],
             'subject'=>[
                 'type'=>'VARCHAR',

@@ -20,7 +20,7 @@
 
       </el-form-item>
       <el-form-item label="內容" prop="content">
-        <vue3-tinymce v-model="form.content" :setting="state.setting" />
+        <Tinymce ref="refTinymce"  />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm()">提交</el-button>
@@ -31,19 +31,17 @@
   </div>
 </template>
 <script setup>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 import { Plus } from '@element-plus/icons-vue'
-import { add,getDetail,edit } from '@/api/article'
+import { getDetail,edit } from '@/api/article'
 import { ElMessage } from 'element-plus'
 import router from '@/router';
-
-
-import Vue3Tinymce from '@jsdawn/vue3-tinymce';
-
 const route = useRoute()
 
 
+import Tinymce from "@/components/Tinymce/index.vue";
+/*tinymce操作*/
+const refTinymce = ref(null);
 
 let form = ref({
   id: route.params.id,
@@ -53,37 +51,14 @@ let form = ref({
 })
 
 
-const state = reactive({
-  content: form.value.content,
-  // editor 配置项
-  setting: {
-    width: '100%',
-    height: 400, // editor 高度
-    toolbar:
-      'undo redo | fullscreen | blocks alignleft aligncenter alignright alignjustify | link unlink | numlist bullist | image media table | fontsize forecolor backcolor | bold italic underline strikethrough | indent outdent | superscript subscript | removeformat |',
-    toolbar_mode: 'sliding',
-    quickbars_selection_toolbar:
-      'removeformat | bold italic underline strikethrough | fontsize forecolor backcolor',
-    plugins: 'link image media table lists fullscreen quickbars imagetools',
-    font_size_formats: '12px 14px 16px 18px',
-    link_default_target: '_blank',
-    link_title: false,
-    nonbreaking_force_tab: true,
-    // 以中文简体为例
-    language: 'zh-Hans',
-    // language_url:
-    //   'https://unpkg.com/@jsdawn/vue3-tinymce@2.0.2/dist/tinymce/langs/zh-Hans.js',
-    custom_images_upload: true,
-    images_upload_url: 'api/Media/uploadFromFile',
-    custom_images_upload_callback: (res) => res.data.uri,
-    custom_images_upload_param: { 'path': 'article' },
-  }
-});
+
+
+
 
 const Detail = async () => {
   getDetail(route.params.id).then(res => {
     form.value = res.data
-    // state.content = res.data.content
+    refTinymce.value.setContent(res.data.content)
 
   })
 }

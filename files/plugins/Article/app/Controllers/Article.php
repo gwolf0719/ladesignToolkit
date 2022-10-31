@@ -47,7 +47,7 @@ class Article extends BaseController
         }
 
         $this->article->insert($data);
-        $this->api->show(200, '新增成功', $data);
+        $this->api->show(200, '新增成功');
     }
 
     /**
@@ -119,7 +119,7 @@ class Article extends BaseController
      * @apiSuccess {Array} data Data
      */
     function get(){
-        $data = $this->article->orderBy('sort','asc')->get()->getResultArray();
+        $data = $this->article->orderBy('sort','asc')->orderBy('created_at','desc')->get()->getResultArray();
         $this->api->show(200, '取得成功', $data);
     }
 

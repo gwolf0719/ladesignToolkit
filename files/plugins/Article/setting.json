@@ -1,64 +1,63 @@
 {
-  "install": {
-    "codeigniter4": [
-      "app/Config/Routes/Article.php",
-      "app/Controllers/Article.php",
-      "app/Database/Migrations/2022-09-19-071033_Article.php",
-      "app/Database/Seeds/Article.php",
-      "app/Models/ModArticle.php"
-    ],
-    "panel": [
-      "vue3admin/src/api/article.js",
-      "vue3admin/src/views/article/index.vue",
-      "vue3admin/src/views/article/edit.vue",
-      "vue3admin/src/views/article/add.vue"
-    ],
-    "menu": {
-      "path": "/articleList",
-      "children": [
-        {
-          "path": "index",
-          "component_import": "index",
-          "dir": "article",
-          "name": "articleList",
-          "meta": {
-            "title": "\u6587\u7ae0\u7ba1\u7406",
-            "icon": "user"
-          }
+    "install": {
+        "codeigniter4": [
+            "app/Config/Routes/Article.php",
+            "app/Controllers/Article.php",
+            "app/Database/Migrations/2022-09-19-071033_Article.php",
+            "app/Database/Seeds/Article.php",
+            "app/Models/ModArticle.php"
+        ],
+        "panel": [
+            "vue3admin/src/api/article.js",
+            "vue3admin/src/views/article/index.vue",
+            "vue3admin/src/views/article/edit.vue",
+            "vue3admin/src/views/article/add.vue"
+        ],
+        "menu": {
+          "path": "/articleList",
+          "children": [
+            {
+              "path": "index",
+              "component_import": "index",
+              "dir": "article",
+              "name": "articleList_index",
+              "hidden": false,
+              "meta": {
+                "title": "新聞動態",
+                "icon": "newspaper"
+              }
+            },
+            {
+              "path": "add",
+              "component_import": "add",
+              "dir": "article",
+              "name": "articleAdd",
+              "hidden": true,
+              "meta": {
+                "title": "\u6dfb\u52a0\u6587\u7ae0",
+                "icon": ""
+              }
+            },
+            {
+              "path": "edit/:id",
+              "component_import": "edit",
+              "dir": "article",
+              "name": "articleEdit",
+              "hidden": true,
+              "meta": {
+                "title": "\u7f16\u8f91\u6587\u7ae0",
+                "icon": ""
+              }
+            }
+          ]
         },
-        {
-          "path": "add",
-          "component_import": "add",
-          "dir": "article",
-          "name": "articleAdd",
-          "hidden": true,
-          "meta": {
-            "title": "\u6dfb\u52a0\u6587\u7ae0",
-            "icon": "user"
-          }
-        },
-        {
-          "path": "edit/:id",
-          "component_import": "edit",
-          "dir": "article",
-          "name": "articleEdit",
-          "hidden": true,
-          "meta": {
-            "title": "\u7f16\u8f91\u6587\u7ae0",
-            "icon": "user"
-          }
-        }
-      ]
+        "shell": [
+            "php spark migrate -all",
+            "apidoc -i app/Controllers/ -o public/doc"
+        ]
     },
-    "shell": [
-      "php spark migrate -all",
-      "apidoc -i app/Controllers/ -o public/doc",
-      "cd vue3admin",
-      "pnpm install @jsdawn/vue3-tinymce"
-    ]
-  },
-  "package": {
-    "codeigniter4": [],
-    "panel": []
-  }
+    "package": {
+        "codeigniter4": [],
+        "panel": []
+    }
 }
