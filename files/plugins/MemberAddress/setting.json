@@ -1,0 +1,40 @@
+{
+    "install": {
+        "codeigniter4": [
+            "app/Config/Routes/MemberAddress.php",
+            "app/Controllers/MemberAddress.php",
+            "app/Database/Migrations/2022-11-02-030440_MemberAddress.php",
+            "app/Models/ModMembersAddress.php"
+        ],
+        "panel": [
+            "vue3admin/src/api/member.js",
+            "vue3admin/src/views/member/index.vue",
+            "vue3admin/src/icons/common/news.svg",
+            "vue3admin/src/icons/common/newspaper.svg",
+            "vue3admin/src/icons/common/premium.svg"
+        ],
+        "menu": {
+          "path": "/member",
+          "children": [
+            {
+              "path": "index",
+              "component_import": "index",
+              "dir": "member",
+              "name": "memberList",
+              "meta": {
+                "title": "會員管理",
+                "icon": "user"
+              }
+            }
+          ]
+        },
+        "shell": [
+            "php spark migrate -all",
+            "apidoc -i app/Controllers/ -o public/doc"
+        ]
+    },
+    "package": {
+        "codeigniter4": [],
+        "panel": []
+    }
+}
